@@ -1,0 +1,68 @@
+* {
+  font-family: 'Roboto';
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.cp-container {
+  margin-top: 100px;
+  margin-left: 285px;
+  padding-right: 40px;
+  padding-bottom: 40px;
+}
+
+form input[type="submit"] {
+  width: 100%;
+  padding: 20px;
+  background-color: #ff7aa8;
+  outline: none;
+  border: none;
+  transition: background .3s;
+  color: white;
+  border-radius: 3px;
+}
+
+form input[type="submit"]:hover {
+  background-color: #bf1650;
+}
+
+form input[type="submit"]:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.category-list>div,
+.category-list>a {
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+}
+
+.category-list>div:nth-child(6n + 4),
+.category-list>a:nth-child(6n + 4) {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.category-list>div:nth-child(6n + 5),
+.category-list>a:nth-child(6n + 5) {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.category-list>div:nth-child(6n + 6),
+.category-list>a:nth-child(6n + 6) {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.category-list>div:nth-child(3n + 1),
+.category-list>a:nth-child(3n + 1) {
+  padding: 20px 25px;
+}

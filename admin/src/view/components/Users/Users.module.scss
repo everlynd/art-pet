@@ -1,0 +1,26 @@
+.users-grid-template {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	align-items: center;
+}
+
+.users__item {
+	padding: 10px 0;
+
+	.roles {
+		display: flex;
+		align-items: center;
+
+		div {
+			&::after {
+				content: ','
+			}
+
+			&:last-of-type {
+				&::after {
+					content: ''
+				}
+			}
+		}
+	}
+}

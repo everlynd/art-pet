@@ -1,0 +1,19 @@
+.rating {
+	svg {
+		path {
+			fill: #dadada
+		}
+	}
+
+	span {
+		cursor: pointer;
+		margin-right: 5px;
+		;
+	}
+}
+
+.filled {
+	path {
+		fill: #ffd503 !important;
+	}
+}

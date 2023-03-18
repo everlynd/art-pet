@@ -1,0 +1,18 @@
+.paginator {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+
+	&--active {
+		opacity: 0.7;
+		pointer-events: none;
+	}
+
+	div {
+		padding: 5px 10px;
+		background: gray;
+		color: white;
+		border-radius: 6px;
+		cursor: pointer;
+	}
+}

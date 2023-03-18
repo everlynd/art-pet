@@ -1,0 +1,85 @@
+.banner-block {
+	display: grid;
+	grid-template-areas:
+		"banner1 banner2"
+		"banner1 banner3";
+	grid-gap: 25px;
+	padding-left: 10px;
+
+	a {
+		position: relative;
+	}
+
+
+	.banner-description {
+		position: absolute;
+		top: -60px;
+		left: 52px;
+
+		button {
+			margin-top: 40px;
+		}
+
+		span {
+			text-decoration: underline;
+			margin-top: 15px;
+			display: block;
+		}
+	}
+
+
+	.banner-title {
+		font-size: 22px;
+		line-height: 22px;
+	}
+
+	.banner-subtitle {
+		font-size: 38px;
+		line-height: 47px;
+		margin-top: 8px;
+	}
+}
+
+.banner-inner {
+	overflow: hidden;
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	max-width: 100%;
+	border-radius: 5px;
+
+	img {
+		transition: transform .7s;
+	}
+
+}
+
+.banner-1 {
+	grid-area: banner1;
+
+	&:hover {
+		img {
+			transform: scale(1.05);
+		}
+	}
+}
+
+.banner-2 {
+	grid-area: banner2;
+
+	&:hover {
+		img {
+			transform: scale(1.05);
+		}
+	}
+}
+
+.banner-3 {
+	grid-area: banner3;
+
+	&:hover {
+		img {
+			transform: scale(1.05);
+		}
+	}
+}

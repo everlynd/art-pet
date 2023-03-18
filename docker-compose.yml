@@ -1,0 +1,61 @@
+version: '3.1'
+services: 
+  mysql:
+    image: mysql
+    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
+    # (this is just an example, not intended to be a production configuration)
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+  nginx:
+    depends_on:
+      - admin
+      - client
+      - api
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - '3080:3080'
+      - '3081:3081'
+
+  api:
+    build:
+      dockerfile: Dockerfile.dev
+      context: './server'
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      - MYSQL_HOST=mysql
+      - PORT=6001
+      - MYSQL_PORT=3306
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DB=arts
+      - PRIVATE_KEY=BIBA
+
+  client:
+    stdin_open: true
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    # ports:
+    #   - "5173:5173"
+
+  admin:
+    stdin_open: true
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./admin
+    volumes:
+      - /app/node_modules
+      - ./admin:/app
+    # ports: 
+    #   - "3001:3001"
