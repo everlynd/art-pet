@@ -8,7 +8,23 @@ export const ProductPageLoader = async ({ _, params }: any) => {
 
 export const localePrice = (price: string) =>
 	new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(+price);
-	
+
+
+export const checkAndParseJSON = (item: string | any) => {
+	try {
+		return JSON.parse(item).length ? JSON.parse(item).map((elem: any) => {
+			if (elem?.name) {
+				return elem.name;
+			}
+			return elem;
+		}) : []
+
+	} catch (e) {
+		return false;
+	}
+}
+
+
 export const titleStyle = {
 	wordBreak: 'break-word',
 	fontSize: '20px',

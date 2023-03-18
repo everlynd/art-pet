@@ -2,7 +2,7 @@ import { Divider, Stack } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 import { Product } from '../../Products/ProductCreateHelper.types';
-import { localePrice } from '../../Products/Products.helper';
+import { localePrice, parseTags } from '../../Products/Products.helper';
 import { ImgSlider } from '../ImgSlider/ImgSlider';
 
 interface ProductPreviewProps<T> {
@@ -42,7 +42,7 @@ export const ProductPreview = React.memo(({ product }: ProductPreviewProps<Produ
                 borderRadius: '6px',
             }}
         >
-            {product.images.length ? <ImgSlider images={product.images} /> : null}
+            {product?.images.length ? <ImgSlider images={product.images} /> : null}
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 <Box sx={{ ...titleStyle }}>{product.title}</Box>
                 <Stack sx={{ ...priceStyle }} direction={'row'} gap={'10px'}>
@@ -59,16 +59,16 @@ export const ProductPreview = React.memo(({ product }: ProductPreviewProps<Produ
                 </Stack>
                 <Box sx={{ ...descriptionStyle }}>{product.description}</Box>
                 <Divider />
-                {product.characteristics.map((characteristic) => (
-                    <Stack key={characteristic.name} direction={'row'} gap={'10px'} sx={{ fontSize: '14px' }}>
+                {JSON.parse(product.characteristics as any).map((characteristic : any) => (
+                    <Stack key={characteristic.name + Math.random()} direction={'row'} gap={'10px'} sx={{ fontSize: '14px' }}>
                         <Box sx={{ whiteSpace: 'nowrap' }}>{characteristic.name}</Box>
                         <Box sx={{ color: '#949494' }}>{`: ${characteristic.value}`}</Box>
                     </Stack>
                 ))}
                 <Stack direction={'row'} gap={'10px'} sx={{ fontSize: '14px' }} flexWrap={'wrap'}>
                     Tags:{' '}
-                    {product.tags.map((tag: any) => (
-                        <Box sx={{ color: '#949494' }} key={tag.name}>
+                    {parseTags(product.tags).map((tag: any) => (
+                        <Box sx={{ color: '#949494' }} key={tag.name + Math.random()}>
                             {tag.name},
                         </Box>
                     ))}

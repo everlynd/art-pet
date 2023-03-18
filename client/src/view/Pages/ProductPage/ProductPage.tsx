@@ -15,12 +15,14 @@ import {
     infoBlockStyle,
     infoBlockGridStyle,
     quantityStyles,
+    checkAndParseJSON,
 } from './ProductPage.helper';
 import { ProductPageTabs } from './ProductPageTabs/ProductPageTabs';
 import { CardSlider } from '../../Components/CardSlider/CardSlider';
 import { Context } from '../../../App';
 import { ProductCart } from '../../ui/ProductCart/ProductCart';
 import { observer } from 'mobx-react-lite';
+import { BreadCrumbs } from '../../Components/BreadCrumbs/BreadCrumbs';
 
 export const ProductPage = observer(() => {
     const product = useLoaderData() as Product;
@@ -32,7 +34,7 @@ export const ProductPage = observer(() => {
     const changeQuantity = (sign: number) => {
         switch (sign) {
             case 1:
-                +selectedQuantity > +product.quantity ? null : setQuantity(selectedQuantity + 1);
+                +selectedQuantity >= +product.quantity ? null : setQuantity(selectedQuantity + 1);
                 break;
             case -1:
                 +selectedQuantity === 0 ? null : setQuantity(selectedQuantity - 1);
@@ -97,7 +99,7 @@ export const ProductPage = observer(() => {
                         <Box sx={{ ...infoBlockGridStyle }}>
                             <Box sx={{ ...infoBlockStyle }}>Tags</Box>
                             <Box sx={{ color: 'var(--color-base-body-text)' }}>
-                                : {JSON.parse(product.tags as string).join(', ')}
+                                : {checkAndParseJSON(product.tags as string).join(', ')}
                             </Box>
                         </Box>
                         <Box sx={{ ...infoBlockGridStyle }}>

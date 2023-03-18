@@ -1,5 +1,6 @@
 import { FormControl, InputLabel, MenuItem, Select, Stack, TextField } from '@mui/material';
 import { Box } from '@mui/system';
+import { useEffect } from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { useLoaderData } from 'react-router-dom';
 import { CharacteristicsInput } from '../ui/CharacteristicsInput/CharacteristicsInput';
@@ -60,7 +61,7 @@ export const ProductCreate = () => {
         recursiveAppend(formData, productID ? updatedProduct : payload);
         productID ? updateProduct(formData) : createProduct(formData);
     };
-    const previewedProduct = watch();
+
     return (
         <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '50px', alignItems: 'flex-start' }}>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -79,7 +80,7 @@ export const ProductCreate = () => {
                     {(['title', 'SKU', 'description', 'price', 'quantity', 'discount'] as unknown as FieldName).map(
                         (elem) => (
                             <TextField
-                                key={elem}
+                                key={Math.random() + Math.random()}
                                 sx={{ marginBottom: '10px', width: '100%' }}
                                 {...register(elem, { required: elem === 'discount' ? false : true })}
                                 id="outlined-basic"
@@ -100,7 +101,7 @@ export const ProductCreate = () => {
                                     <Select {...field} id="demo-simple-select-helper" label="Product Category">
                                         {categories
                                             ? categories.map((elem: any) => (
-                                                  <MenuItem key={elem.id} value={elem.id}>
+                                                  <MenuItem key={elem.id + Math.random()} value={elem.id}>
                                                       {elem.title}
                                                   </MenuItem>
                                               ))
@@ -132,7 +133,7 @@ export const ProductCreate = () => {
                 <FileInput control={control} name={'images'} />
                 <input type="submit" value={'Send product'} />
             </form>
-            {previewedProduct ? <ProductPreview product={previewedProduct} /> : null}
+            {/* <ProductPreview product={product} />  */}
         </Box>
     );
 };

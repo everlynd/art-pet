@@ -14,7 +14,7 @@ export const TagInput = ({ control, name, append, remove, fields, register }: Fi
                     {fields.map(({ id }: FormId, index: number) => {
                         return (
                             <Box
-                                key={id}
+                                key={Math.random() + id}
                                 sx={{
                                     display: 'grid',
                                     gridTemplateColumns: '1fr 1fr',

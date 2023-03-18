@@ -38,8 +38,8 @@ export const ImgSlider = ({ images }: ImgSliderProps) => {
                     border: '1px solid var(--color-base-border)',
                     borderRadius: '3px',
                     position: 'absolute',
-                    width: '540px',
-                    height: '540px',
+                    width: '220px',
+                    height: '220px',
                     opacity: '0',
                     transition: 'opacity .3s',
                     display: 'flex',
@@ -48,7 +48,7 @@ export const ImgSlider = ({ images }: ImgSliderProps) => {
                 '& .showed': { opacity: '1' },
             }}
         >
-            <Box sx={{ position: 'relative', height: '540px', width: '540px' }}>
+            <Box sx={{ position: 'relative', height: '220px', width: '220px' }}>
                 {images.map((img, idx) => (
                     <img key={img} className={count === idx ? 'showed' : ''} src={BASE_URL + img} alt="kartinka" />
                 ))}

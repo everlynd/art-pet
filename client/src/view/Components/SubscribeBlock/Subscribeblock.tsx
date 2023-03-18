@@ -18,7 +18,7 @@ export const SubscribeBlock = () => {
                 <p style={{ color: 'var(--color-base-body-text)' }}>
                     Subscribe to our latest newsletter to get news about special discounts.
                 </p>
-                <Stack direction={'row'}>
+                <Stack direction={'row'} gap={'25px'}>
                     <Input>Your email address</Input>
                     <Button appearance="primary">Subscribe</Button>
                 </Stack>

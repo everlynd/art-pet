@@ -8,7 +8,6 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-
   nginx:
     depends_on:
       - admin
@@ -21,7 +20,6 @@ services:
     ports:
       - '3080:3080'
       - '3081:3081'
-
   api:
     build:
       dockerfile: Dockerfile.dev
