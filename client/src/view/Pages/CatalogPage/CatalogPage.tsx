@@ -1,7 +1,10 @@
-import { Box } from '@mui/system'
+import { Box } from '@mui/system';
+import { Filter } from '../../Components/Filter/Filter';
 
 export const CatalogPage = () => {
-	return (
-		<Box>CATALOGERKAK</Box>
-	)
-}
+    return (
+        <Box>
+            <Filter />
+        </Box>
+    );
+};
