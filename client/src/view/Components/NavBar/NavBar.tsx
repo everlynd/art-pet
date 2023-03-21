@@ -44,7 +44,7 @@ export const NavBar = observer(() => {
                     },
                 }}
             >
-                <Link to={'/design'}>Design </Link>
+                <Link to={'/catalog/design'}>Design </Link>
                 <Box
                     className="dropdown"
                     sx={{
@@ -57,7 +57,7 @@ export const NavBar = observer(() => {
                         borderRadius: 'var(--base-radius)',
                         padding: '10px',
                         zIndex: '2',
-                        top: '25px',
+                        top: '20px',
                         left: '-72px',
                         visibility: 'hidden',
                     }}
@@ -116,8 +116,8 @@ export const NavBar = observer(() => {
                     ) : null}
                 </Box>
             </Box>
-            <Link to={'/handprint'}>Handprint</Link>
-            <Link to={'/ikebana'}>Ikebana</Link>
+            <Link to={'/catalog/handprint'}>Handprint</Link>
+            <Link to={'/catalog/ikebana'}>Ikebana</Link>
             <Link to={'/contact'}>Contact us</Link>
             <Link to={'/Blog'}>Blog</Link>
         </Box>

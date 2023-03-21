@@ -41,8 +41,8 @@ import * as path from 'path'
 		AuthModule,
 		PostsModule,
 		FilesModule,
-		ProductModule,
 		CategoriesModule,
+		ProductModule,
 	],
 })
 export class AppModule { }

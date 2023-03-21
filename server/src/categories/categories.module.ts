@@ -14,5 +14,6 @@ import { CategoriesService } from './categories.service';
     forwardRef(() => ProductModule),
     FilesModule
   ],
+  exports: [CategoriesService]
 })
 export class CategoriesModule { }

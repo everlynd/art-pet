@@ -1,14 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { CategoriesService } from 'src/categories/categories.service';
 import { FilesService } from 'src/files/files.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { Product } from './product.model';
-
+import { Op } from 'sequelize'
+import sequelize from 'sequelize';
 @Injectable()
 export class ProductService {
 
 	constructor(@InjectModel(Product) private productRepository: typeof Product,
-		private fileService: FilesService) { }
+		private fileService: FilesService,
+		@Inject(forwardRef(() => CategoriesService)) private categoryService: CategoriesService) { }
 
 	async getProducts(limits: { limit: number, page: number }) {
 		const totalProducts = await this.productRepository.findAll({ include: { all: true } })
@@ -54,5 +57,18 @@ export class ProductService {
 		}
 		const product = await this.productRepository.update({ ...dto, }, { where: { id: dto.id } })
 		return product
+	}
+
+	async getProductsByCategory(id: any, filters: any) {
+		const from = filters?.from || '0';
+		const to = filters?.to || '99999999';
+		const category = await this.categoryService.findByUrl(id);
+		if (!category) {
+			const products = await this.productRepository.findAll({ where: [sequelize.where(sequelize.cast(sequelize.col(`price`), 'SIGNED'), { [Op.gte]: +from, [Op.lte]: +to })], })
+			return { products: products, filters: {} };
+		}
+		const categoryId = category.id || ''
+		const products = await this.productRepository.findAll({ where: [sequelize.where(sequelize.cast(sequelize.col(`price`), 'SIGNED'), { [Op.gte]: +from, [Op.lte]: +to }), { categoryId: categoryId }], })
+		return { products: products, filters: {} };
 	}
 }

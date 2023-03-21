@@ -2,7 +2,6 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { FilesService } from 'src/files/files.service';
 import { appendChildrens, generateUrl } from 'src/helpers/helpers';
-import { Product } from 'src/product/product.model';
 import { ProductService } from 'src/product/product.service';
 import { Category } from './categories.model';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -11,7 +10,8 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 export class CategoriesService {
 
 	constructor(@InjectModel(Category) private categoryRepository: typeof Category,
-		private productService: ProductService, private fileService: FilesService
+		private productService: ProductService,
+		private fileService: FilesService
 	) { }
 
 	async getAllCategories() {
@@ -57,7 +57,7 @@ export class CategoriesService {
 
 
 	async editCategory(newCategory: Category, images: any) {
-		const updatedCategory = {...newCategory}
+		const updatedCategory = { ...newCategory }
 		if (images.length) {
 			const fileName = await this.fileService.createFile(images)
 			updatedCategory.icon = fileName
@@ -71,4 +71,8 @@ export class CategoriesService {
 		return category;
 	}
 
+	async findByUrl(url: string) {
+		const category = await this.categoryRepository.findOne({ where: { url: url } });
+		return category
+	}
 }

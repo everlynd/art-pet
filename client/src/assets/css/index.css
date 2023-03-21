@@ -115,3 +115,9 @@ body:has(.header-fixed) {
 .activeTab {
   color: var(--color-accent-1);
 }
+
+.custom-disable {
+  user-select: none;
+  pointer-events: none;
+  opacity: 0.3;
+}

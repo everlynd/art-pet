@@ -20,7 +20,7 @@ export const BreadCrumbs = observer(({ location }: any) => {
     } = rootStore;
     const currentProduct = useMemo(() => {
         return products.find((elem) => +elem.id === +params.id)?.title;
-    }, [products]);
+    }, [products, params]);
     const currentCategories = useMemo(() => {
         const category = categories.find((elem) => elem.url === params.id);
         let parentCategory;
@@ -28,12 +28,14 @@ export const BreadCrumbs = observer(({ location }: any) => {
             parentCategory = categories.find((elem) => elem.id === category.parentId);
             return [
                 { title: 'Home', url: '' },
+                { title: 'Design', url: 'design' },
                 { title: parentCategory?.title, url: parentCategory?.url },
                 { title: category.title, url: category.url },
             ];
         }
         return [
             { title: 'Home', url: '' },
+            { title: 'Design', url: 'design' },
             { title: category?.title, url: category?.url },
         ];
     }, [params, categories]);

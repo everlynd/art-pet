@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { CreateProductDto } from './dto/create-product.dto';
 import { Product } from './product.model';
@@ -31,8 +31,12 @@ export class ProductController {
 	@UseInterceptors(FileFieldsInterceptor([
 		{ name: 'images', maxCount: 100000 },
 	]))
-	
 	updateProduct(@Body() dto: Product) {
 		return this.productService.updateProduct(dto)
+	}
+
+	@Post('/getByCategory')
+	getProductsByCategory(@Body() { id, filters }) {
+		return this.productService.getProductsByCategory(id, filters);
 	}
 }

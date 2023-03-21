@@ -73,9 +73,9 @@ export const ImgSlider = ({ images }: ImgSliderProps) => {
                     },
                 }}
             >
-                <button onClick={() => changeSlide(1)}>&lt;</button>
+                <button onClick={() => changeSlide(-1)}>&lt;</button>
                 <div>{`${count + 1} / ${images.length}`}</div>
-                <button onClick={() => changeSlide(-1)}>&gt;</button>
+                <button onClick={() => changeSlide(1)}>&gt;</button>
             </Stack>
         </Box>
     );

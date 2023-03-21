@@ -6,13 +6,14 @@ import { HomePage } from './view/Pages/HomePage/HomePage';
 import { ProductPage } from './view/Pages/ProductPage/ProductPage';
 import { ProductPageLoader } from './view/Pages/ProductPage/ProductPage.helper';
 import { CatalogPage } from './view/Pages/CatalogPage/CatalogPage';
+import { CatalogLoader } from './view/Pages/CatalogPage/CatalogPage.helper';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<App />}>
             <Route index element={<HomePage />} />
             <Route path="product/:id" element={<ProductPage />} loader={ProductPageLoader} />
-            <Route path="catalog/:id" element={<CatalogPage />} />
+            <Route path="catalog/:id" element={<CatalogPage />}/>
             {/* <Route path="users" element={<Users />} />
             <Route path="products" element={<ProductsPage />} />
             <Route path="products/:id" element={<ProductCreate />} loader={ProductPageLoader} />

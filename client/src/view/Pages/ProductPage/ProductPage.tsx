@@ -46,7 +46,7 @@ export const ProductPage = observer(() => {
             top: 0,
             behavior: 'smooth',
         });
-    }, []);
+    }, [product]);
     const parsedProductCharacterstics = useMemo(() => {
         try {
             return JSON.parse(product.characteristics as string);

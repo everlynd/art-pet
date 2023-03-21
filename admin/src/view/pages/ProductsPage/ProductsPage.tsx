@@ -10,7 +10,7 @@ import { fetchProducts } from './ProductsPage.helper';
 
 const gridTemplate = {
     display: 'grid',
-    gridTemplateColumns: '0.1fr 0.5fr 1fr 0.5fr',
+    gridTemplateColumns: '0.1fr 0.5fr 1fr 0.5fr 0.3fr',
     alignItems: 'center',
     justifyContent: 'center',
     gap: '10px',
@@ -37,6 +37,7 @@ export const ProductsPage = () => {
                 <Box></Box>
                 <Box>Title</Box>
                 <Box>Price</Box>
+                <Box>Quantity</Box>
             </Box>
             {products
                 ? products.map((product) => (
@@ -64,6 +65,7 @@ export const ProductsPage = () => {
                               </Box>
                               <Box> {product.title}</Box>
                               <Box>{localePrice(product.price)}</Box>
+                              <Box>{product.quantity}</Box>
                           </Link>
                       </Box>
                   ))

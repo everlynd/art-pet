@@ -53,6 +53,7 @@ export const customInputStyles = {
 		border: '1px solid var(--color-base-border)',
 		padding: '10px 15px',
 		borderRadius: '3px',
+		width: '100%',
 	},
 	'& label': {
 		display: 'flex',

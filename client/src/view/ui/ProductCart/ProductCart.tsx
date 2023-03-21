@@ -1,19 +1,27 @@
-import { Stack } from '@mui/material';
+import { Stack, Tooltip } from '@mui/material';
 import { Box } from '@mui/system';
 import { Link } from 'react-router-dom';
 import { BASE_URL } from '../../../data/api/useAxios';
 import { Button } from '../Button/Button';
 import { Icon } from '../Icons/Icons';
 import { Rating } from '../Rating/Rating';
-import { iconsStyles, localePrice, ProductCartProps, productCartStylesBlock, saleBlock } from './ProductCart.helper';
+import {
+    iconsStyles,
+    localePrice,
+    ProductCartProps,
+    productCartStylesBlock,
+    saleBlock,
+    soldOutBlock,
+} from './ProductCart.helper';
 
 export const ProductCart = ({ product }: ProductCartProps) => {
     return (
-        <Link to={`product/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+        <Link to={`/product/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
             <Box sx={{ ...productCartStylesBlock }}>
-                {product.discount ? (
+                {product.discount && product.quantity ? (
                     <Box data-content={`${product.discount} %`} className="sale" sx={{ ...saleBlock }}></Box>
                 ) : null}
+                {!product.quantity ? <Box sx={{ ...soldOutBlock }}></Box> : null}
                 <Stack
                     className="icon-block"
                     gap={'10px'}
@@ -48,7 +56,20 @@ export const ProductCart = ({ product }: ProductCartProps) => {
                         </Box>
                     ) : null}
                 </Box>
-                <Box>{product.title}</Box>
+                <Tooltip title={product.title.length > 37 ? product.title : ''}>
+                    <Box
+                        sx={{
+                            minHeight: '41px',
+                            textOverflow: 'ellipsis',
+                            WebkitLineClamp: '2',
+                            overflow: 'hidden',
+                            display: '-webkit-box',
+                            WebkitBoxOrient: 'vertical',
+                        }}
+                    >
+                        {product.title}
+                    </Box>
+                </Tooltip>
                 <Box>
                     <Rating rating={product.rating} />
                 </Box>

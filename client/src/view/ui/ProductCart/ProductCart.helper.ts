@@ -65,6 +65,19 @@ export const saleBlock = {
 	'&::after': { content: '"Sale"' },
 }
 
+export const soldOutBlock = {
+	position: 'absolute',
+	background: 'var(--color-accent-1)',
+	padding: '2px 8px',
+	borderRadius: '3px',
+	color: 'white',
+	fontSize: '12px',
+	lineHeight: '13px',
+	transition: 'all var(--base-transition)',
+	zIndex: '2',
+	'&::after': { content: '"Sold out"' },
+}
+
 export interface ProductCartProps {
 	product: Product;
 }
