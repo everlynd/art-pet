@@ -4,6 +4,7 @@
 	border-radius: var(--base-radius);
 	padding: var(--base-padding);
 	width: 100%;
+	box-sizing: border-box;
 
 	&:focus~label,
 	&:not(:placeholder-shown)~label {

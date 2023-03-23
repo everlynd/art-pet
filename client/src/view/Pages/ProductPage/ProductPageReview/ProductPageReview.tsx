@@ -65,6 +65,7 @@ export const ProductPageReview = () => {
                                     borderRadius: 'var(--base-radius)',
                                     padding: 'var(--base-padding)',
                                     width: '100%',
+                                    boxSizing: 'border-box',
                                 }}
                                 placeholder="Write your comment here"
                             ></textarea>

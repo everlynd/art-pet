@@ -20,6 +20,12 @@ export class User extends Model<User, UserCreationAttributes> {
 	@Column({ type: DataType.STRING, allowNull: false })
 	password: string;
 
+	@Column({ type: DataType.STRING })
+	firstName: string;
+
+	@Column({ type: DataType.STRING })
+	lastName: string;
+
 	@Column({ type: DataType.BOOLEAN, defaultValue: false })
 	banned: boolean;
 
@@ -32,4 +38,6 @@ export class User extends Model<User, UserCreationAttributes> {
 	@HasMany(() => Post)
 	posts: Post[];
 
+	// @HasMany(() => CardItem)
+	// cardItems: CardItem[]
 }

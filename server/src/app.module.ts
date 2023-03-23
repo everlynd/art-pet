@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from './users/users.model';
 import { UsersModule } from './users/users.module';
-import { RolesService } from './roles/roles.service';
+// import { RolesService } from './roles/roles.service';
 import { RolesModule } from './roles/roles.module';
 import { Role } from './roles/roles.model';
 import { UserRoles } from './roles/user-roles.model';
@@ -14,7 +14,11 @@ import { FilesModule } from './files/files.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { ProductModule } from './product/product.module';
 import { CategoriesModule } from './categories/categories.module';
+import { CartModule } from './cart/cart.module';
 import * as path from 'path'
+import { CartItem } from './cart/cart.model';
+import { Product } from './product/product.model';
+import { Category } from './categories/categories.model';
 
 @Module({
 	controllers: [],
@@ -30,7 +34,7 @@ import * as path from 'path'
 			username: process.env.MYSQL_USERNAME,
 			password: process.env.MYSQL_PASSWORD,
 			database: process.env.MYSQL_DB,
-			models: [User, Role, UserRoles, Post],
+			models: [User, Role, UserRoles, Post, CartItem, Product, Category],
 			autoLoadModels: true,
 		}),
 		ServeStaticModule.forRoot({
@@ -43,6 +47,7 @@ import * as path from 'path'
 		FilesModule,
 		CategoriesModule,
 		ProductModule,
+		CartModule,
 	],
 })
 export class AppModule { }

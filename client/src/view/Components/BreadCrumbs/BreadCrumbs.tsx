@@ -42,7 +42,12 @@ export const BreadCrumbs = observer(({ location }: any) => {
     return (
         <Box sx={{ ...backgroundStyles, background: `url(${bg}) no-repeat fixed top` }}>
             <Box sx={{ '& h3': { margin: '0 0 5px 0' } }}>
-                {location.pathname.includes('product/') ? (
+                {location.pathname.includes('login') || location.pathname.includes('register') ? (
+                    <Stack alignItems={'center'}>
+                        <h3>{location.pathname.includes('login') ? 'Account' : 'Create Account'}</h3>
+                        <Link to={'/'}>Home</Link>
+                    </Stack>
+                ) : location.pathname.includes('product/') ? (
                     <Stack direction={'row'} sx={{ ...linkStyles }}>
                         <Link to={'/'}>Home</Link>
                         <Link to={'/'}>{currentProduct}</Link>

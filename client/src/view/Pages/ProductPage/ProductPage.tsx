@@ -28,6 +28,7 @@ export const ProductPage = observer(() => {
     const product = useLoaderData() as Product;
     const { rootStore } = useContext(Context);
     const {
+        cardStore: { addToCard, getCartItems },
         productsStore: { products },
     } = rootStore;
     const [selectedQuantity, setQuantity] = useState(1);
@@ -123,10 +124,14 @@ export const ProductPage = observer(() => {
                             </Box>
                         </Box>
                         <Stack direction={'row'} gap={'20px'}>
-                            <Button style={{ width: '100%' }} appearance="secondary">
+                            <Button
+                                style={{ width: '100%' }}
+                                appearance="secondary"
+                                onClick={() => addToCard(product, selectedQuantity)}
+                            >
                                 Add to cart
                             </Button>
-                            <Button style={{ width: '100%' }} appearance="primary">
+                            <Button style={{ width: '100%' }} appearance="primary" onClick={() => getCartItems()}>
                                 Buy it Now
                             </Button>
                         </Stack>

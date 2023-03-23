@@ -3,4 +3,5 @@ import { ButtonHTMLAttributes, DetailedHTMLProps, Dispatch, ReactNode, SetStateA
 export interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
 	children: ReactNode;
 	appearance: 'primary' | 'secondary' | 'other';
+	type?: "submit" | "reset" | "button"
 }

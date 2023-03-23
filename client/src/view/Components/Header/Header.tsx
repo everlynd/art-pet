@@ -1,12 +1,20 @@
 import { Stack, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Context } from '../../../App';
 import { Icon } from '../../ui';
 import { NavBar } from '../NavBar/NavBar';
+import { iconsCounterStyles } from './Header.helper';
 
-export const Header = () => {
+export const Header = observer(() => {
     window.addEventListener('scroll', () => (window.pageYOffset >= 120 ? setFixed(true) : setFixed(false)));
     const [fixed, setFixed] = useState(false);
+    const { rootStore } = useContext(Context);
+    const {
+        cardStore: { cardItemLength },
+    } = rootStore;
     return (
         <Box
             className={`${fixed ? 'header-fixed' : ''}`}
@@ -31,11 +39,28 @@ export const Header = () => {
             <NavBar />
             <Stack direction={'row'} gap={'20px'} sx={{ '& svg': { width: '26px', height: '26px' } }}>
                 <Icon name="magnifier" />
-                <Icon name="profile" />
-                <Icon name="heart" />
-                <Icon name="refresh" />
-                <Icon name="cart" />
+                <Link to={'/login'}>
+                    <Icon name="profile" />
+                </Link>
+                <Box sx={{ position: 'relative' }}>
+                    <Box sx={{ ...iconsCounterStyles }} component={'span'}>
+                        {cardItemLength}
+                    </Box>
+                    <Icon name="heart" />
+                </Box>
+                <Box sx={{ position: 'relative' }}>
+                    <Box sx={{ ...iconsCounterStyles }} component={'span'}>
+                        {cardItemLength}
+                    </Box>
+                    <Icon name="refresh" />
+                </Box>
+                <Box sx={{ position: 'relative' }}>
+                    <Box sx={{ ...iconsCounterStyles }} component={'span'}>
+                        {cardItemLength}
+                    </Box>
+                    <Icon name="cart" />
+                </Box>
             </Stack>
         </Box>
     );
-};
+});
