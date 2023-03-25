@@ -14,10 +14,10 @@ jobs:
               with:
                 compose-file: "./docker/docker-compose.yml"
                 down-flags: "--volumes"
-                services: |
-                  mysql
-                  nginx
-                  api
-                  client
-                  admin
+                services: 
+                    mysql
+                    nginx
+                    api
+                    client
+                    admin
                  
