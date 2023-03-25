@@ -15,6 +15,6 @@ jobs:
               uses: elgohr/Publish-Docker-Github-Action@v4
               with:
                   registry: ghcr.io
-                  name: ghcr.io#everlynd:art-pet#
+                  name: 'ghcr.io/everlynd/art-pet'
                   username: ${{ github.actor }}
                   password: ${{ secrets.GITHUB_TOKEN }}
