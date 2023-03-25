@@ -10,6 +10,7 @@ export class CartController {
 
 	constructor(private cartService: CartService) {}
 
+	@UseGuards(JwtAuthGuard)
 	@Post('/add')
 	addToCart(@Body() dto: any, @Headers() headers: any) {
 		return this.cartService.addToCart(dto, headers);
@@ -17,7 +18,12 @@ export class CartController {
 
 	@UseGuards(JwtAuthGuard)
 	@Get('/get-cart-items')
-	getCartItems() {
-		return this.cartService.getCartItems();
+	getCartItems(@Headers() headers: any) {
+		return this.cartService.getCartItems(headers);
+	}
+	@UseGuards(JwtAuthGuard)
+	@Post('/remove')
+	removeFromCart(@Body() {id}, @Headers() headers: any){
+		return this.cartService.removeFromCart(id, headers)
 	}
 }

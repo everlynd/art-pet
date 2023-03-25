@@ -3,7 +3,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { Box } from '@mui/system';
 import { useContext, useEffect, useMemo, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { Product } from '../../../data/store/productStore';
 import { Button, Icon, Rating } from '../../ui';
 import { ImgSlider } from '../../ui/ImgSlider/ImgSlider';
@@ -22,13 +22,14 @@ import { CardSlider } from '../../Components/CardSlider/CardSlider';
 import { Context } from '../../../App';
 import { ProductCart } from '../../ui/ProductCart/ProductCart';
 import { observer } from 'mobx-react-lite';
-import { BreadCrumbs } from '../../Components/BreadCrumbs/BreadCrumbs';
 
 export const ProductPage = observer(() => {
     const product = useLoaderData() as Product;
+    const navigate = useNavigate();
     const { rootStore } = useContext(Context);
     const {
-        cardStore: { addToCard, getCartItems },
+        cardStore: { addToCard, getCartItems, cardItems },
+        userStore: { isLogin },
         productsStore: { products },
     } = rootStore;
     const [selectedQuantity, setQuantity] = useState(1);
@@ -127,7 +128,15 @@ export const ProductPage = observer(() => {
                             <Button
                                 style={{ width: '100%' }}
                                 appearance="secondary"
-                                onClick={() => addToCard(product, selectedQuantity)}
+                                onClick={() => {
+                                    if (localStorage.getItem('token')) {
+                                        addToCard(product, selectedQuantity);
+                                    } else {
+                                        navigate('/login', {
+                                            state: { prevRoute: `/product/${product.id}` },
+                                        });
+                                    }
+                                }}
                             >
                                 Add to cart
                             </Button>

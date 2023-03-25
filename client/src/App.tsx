@@ -5,6 +5,7 @@ import { SubscribeBlock } from './view/Components/SubscribeBlock/Subscribeblock'
 import { Outlet, useLocation } from 'react-router-dom';
 import { RootStore } from './data/store/rootStore';
 import { BreadCrumbs } from './view/Components/BreadCrumbs/BreadCrumbs';
+import { CartPopup } from './view/Components/CartPopup/CartPopup';
 
 const rootStore = new RootStore();
 export const Context = createContext({ rootStore });
@@ -15,6 +16,7 @@ export const App = () => {
         <Context.Provider value={{ rootStore }}>
             <div className="App">
                 <Header />
+                <CartPopup />
                 {location.pathname === '/' ? null : <BreadCrumbs location={location} />}
                 <Outlet />
                 <SubscribeBlock />

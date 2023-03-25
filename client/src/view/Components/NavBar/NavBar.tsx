@@ -9,12 +9,14 @@ export const NavBar = observer(() => {
     const { rootStore } = useContext(Context);
     const {
         categoriesStore: { getAllCategories, categories },
-        productsStore: { getAllProducts, products}
+        productsStore: { getAllProducts, products },
+        cardStore: { getCartItems },
     } = rootStore;
     useEffect(() => {
         getAllCategories();
         getAllProducts();
-    }, [getAllCategories, getAllProducts]);
+        getCartItems();
+    }, [getAllCategories, getAllProducts, getCartItems]);
     return (
         <Box
             sx={{

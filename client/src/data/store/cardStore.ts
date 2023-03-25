@@ -5,8 +5,8 @@ import { Product } from './productStore';
 import { RootStore } from './rootStore'
 
 interface ICardItems {
-  qty: number;
-  pt: Product;
+  quantity: number;
+  product: Product;
 }
 
 export class CardStore {
@@ -25,51 +25,48 @@ export class CardStore {
   }
 
   calculateCardTotals() {
-    this.cardItemLength = this.cardItems.reduce((acc, curr) => acc + curr.qty, 0)
-    console.log(this.cardItems.reduce((acc, curr) => (acc + +curr.pt.price) * curr.qty, 0))
+    this.cardItemLength = this.cardItems?.length ? this.cardItems.reduce((acc, curr) => acc + curr.quantity, 0) : 0;
+    this.cardTotalPrice = this.cardItems?.length ? this.cardItems.reduce((acc, curr) => acc + curr.quantity * (curr.product.discount ? +curr.product.discount : +curr.product.price), 0) : 0
   }
 
   addToCard = async (product: Product, quantity: number) => {
-    const res = await useAxios({ url: '/cart/add', method: 'POST', data: { quantity: quantity, productId: product.id } })
-    console.log(res)
-    // runInAction(() => {
-    //   this.cardItems.push({ qty: quantity, pt: product })
-    //   this.calculateCardTotals()
-    // })
-  }
-
-  getCartItems = async() => {
-    const res = await useAxios({ url: '/cart/get-cart-items', method: 'GET'})
-    console.log(res)
-  }
-
-  removeFromCard(product: Product) {
+    await useAxios({ url: '/cart/add', method: 'POST', data: { quantity: quantity, productId: product.id } })
     runInAction(() => {
-      // this.cardItems = this.cardItems.filter(element => element !== product)
-      // this.calculateCardTotals()
+      const isProductIn = this.cardItems.find(elem => elem.product.id === product.id)
+      if (isProductIn) {
+        isProductIn.quantity = isProductIn.quantity + quantity;
+        this.calculateCardTotals();
+        return;
+      }
+      this.cardItems = [...this.cardItems, { product: product, quantity: quantity }]
+      this.calculateCardTotals();
     })
   }
 
-  // setProductQuantity(sign: string, id: string) {
-  //   runInAction(() => {
-  //     const product = this.cardItems.find(element => element.id = id) as Product
-  //     if (sign === 'increase') {
-  //       product.quantity = product.quantity + 1;
-  //     }
-  //     if (sign === 'decrease') {
-  //       product.quantity = product.quantity - 1;
-  //     }
-  //     this.calculateCardTotals()
-  //   })
-  // }
+  removeFromCard = async (id: number) => {
+    await useAxios({ url: '/cart/remove', method: 'POST', data: { id: id } })
+    runInAction(() => {
+      this.cardItems = this.cardItems.filter((elem: any) => elem.product.id !== id)
+      this.calculateCardTotals();
+    })
+  }
 
-  getCartProduct(id: string) {
+  getCartItems = async () => {
+    const res = await useAxios({ url: '/cart/get-cart-items', method: 'GET' })
+    runInAction(() => {
+      this.cardItems = res?.data;
+      this.calculateCardTotals();
+    })
+  }
+
+  async getCartProduct(id: string) {
     runInAction(() => {
       // return this.cardItems.find((elem: Product) => elem.id = id)
     })
   }
 
-  setCartPopup() {
-    this.cardPopupIsOpen = !this.cardPopupIsOpen
+  setCartPopup = () => {
+    runInAction(() => this.cardPopupIsOpen = !this.cardPopupIsOpen)
   }
+
 }

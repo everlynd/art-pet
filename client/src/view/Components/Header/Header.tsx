@@ -2,7 +2,7 @@ import { Stack, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { observer } from 'mobx-react-lite';
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '../../../App';
 import { Icon } from '../../ui';
 import { NavBar } from '../NavBar/NavBar';
@@ -13,8 +13,9 @@ export const Header = observer(() => {
     const [fixed, setFixed] = useState(false);
     const { rootStore } = useContext(Context);
     const {
-        cardStore: { cardItemLength },
+        cardStore: { cardItemLength, setCartPopup },
     } = rootStore;
+    const navigate = useNavigate();
     return (
         <Box
             className={`${fixed ? 'header-fixed' : ''}`}
@@ -54,7 +55,16 @@ export const Header = observer(() => {
                     </Box>
                     <Icon name="refresh" />
                 </Box>
-                <Box sx={{ position: 'relative' }}>
+                <Box
+                    sx={{ position: 'relative', cursor: 'pointer' }}
+                    onClick={() => {
+                        if (localStorage.getItem('token')) {
+                            setCartPopup();
+                        } else {
+                            navigate('/login');
+                        }
+                    }}
+                >
                     <Box sx={{ ...iconsCounterStyles }} component={'span'}>
                         {cardItemLength}
                     </Box>

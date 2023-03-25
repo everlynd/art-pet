@@ -19,6 +19,7 @@ import * as path from 'path'
 import { CartItem } from './cart/cart.model';
 import { Product } from './product/product.model';
 import { Category } from './categories/categories.model';
+import { ReviewModule } from './review/review.module';
 
 @Module({
 	controllers: [],
@@ -48,6 +49,7 @@ import { Category } from './categories/categories.model';
 		CategoriesModule,
 		ProductModule,
 		CartModule,
+		ReviewModule,
 	],
 })
 export class AppModule { }

@@ -121,3 +121,7 @@ body:has(.header-fixed) {
   pointer-events: none;
   opacity: 0.3;
 }
+
+.popup-open {
+  right: 0 !important;
+}
