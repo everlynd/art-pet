@@ -9,7 +9,11 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
-            - uses: isbang/compose-action@v1.4.1
+            - name: Publish to Registry
+              uses: elgohr/Publish-Docker-Github-Action@v5
               with:
                   compose-file: './docker-compose.yml'
-                  dockerfile: './Dockerfile.dev'
+                  name: owner/repository/image
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
+                  registry: ghcr.io
