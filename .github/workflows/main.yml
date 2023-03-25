@@ -11,12 +11,10 @@ jobs:
             - uses: actions/checkout@v3
             - uses: isbang/compose-action@v1.4.1
               with:
-                compose-file: "./docker/docker-compose.yml"
-                down-flags: "--volumes"
-                services: 
-                    mysql
-                    nginx
-                    api
-                    client
-                    admin
-                 
+                  compose-file: '../../docker-compose.yml'
+                  down-flags: '--volumes'
+                  services: mysql
+                      nginx
+                      api
+                      client
+                      admin
