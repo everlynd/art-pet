@@ -12,7 +12,7 @@ jobs:
             - name: Publish to Registry
               uses: elgohr/Publish-Docker-Github-Action@v5
               with:
-                  compose-file: './docker-compose.yml'
+                  # compose-file: './docker-compose.yml'
                   name: https://docker.pkg.github.com/everlynd/art-pet/art-pet
                   username: ${{ github.actor }}
                   password: ${{ secrets.GITHUB_TOKEN }}
