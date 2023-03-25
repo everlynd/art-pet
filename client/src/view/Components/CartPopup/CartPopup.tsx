@@ -148,7 +148,15 @@ export const CartPopup = observer(() => {
                             >
                                 View cart
                             </Button>
-                            <Button appearance="other">Check out</Button>
+                            <Button
+                                appearance="other"
+                                onClick={() => {
+                                    navigate('/payment');
+                                    setCartPopup();
+                                }}
+                            >
+                                Check out
+                            </Button>
                         </Box>
                     </Box>
                 ) : null}

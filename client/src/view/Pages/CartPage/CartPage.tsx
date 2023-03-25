@@ -1,8 +1,8 @@
 import { Divider, Stack } from '@mui/material';
 import { Box } from '@mui/system';
 import { observer } from 'mobx-react-lite';
-import { useContext, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useEffect, useMemo } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '../../../App';
 import { BASE_URL } from '../../../data/api/useAxios';
 import { Button } from '../../ui';
@@ -14,6 +14,7 @@ export const CartPage = observer(() => {
     const {
         cardStore: { cardItems, cardTotalPrice },
     } = rootStore;
+    const navigate = useNavigate();
     const parsedCartItems = useMemo(() => {
         return cardItems && cardItems.length
             ? cardItems.map((elem) => {
@@ -26,6 +27,11 @@ export const CartPage = observer(() => {
               })
             : [];
     }, [cardItems]);
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+        });
+    });
     return (
         <Box className="main-container" sx={{ gap: '20px', marginBottom: '40px' }}>
             <Box sx={{ ...cartGrid }}>
@@ -99,7 +105,9 @@ export const CartPage = observer(() => {
                     <Box sx={{ fontWeight: '500' }}>Subtotal {localePrice(String(cardTotalPrice))}</Box>
                     <Box>Taxes and shipping calculated at checkout</Box>
                     <Box sx={{ width: '100%', '& button': { width: '100%' } }}>
-                        <Button appearance="other">Check out</Button>
+                        <Button appearance="other" onClick={() => navigate('/payment')}>
+                            Check out
+                        </Button>
                     </Box>
                 </Stack>
             </Box>
