@@ -18,4 +18,3 @@ jobs:
                   name: ghcr.io#everlynd#art-pet#
                   username: ${{ github.actor }}
                   password: ${{ secrets.GITHUB_TOKEN }}
-                  tags: 'develop'
