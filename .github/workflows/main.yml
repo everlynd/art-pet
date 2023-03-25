@@ -13,7 +13,7 @@ jobs:
               uses: elgohr/Publish-Docker-Github-Action@v5
               with:
                   registry: docker.pkg.github.com
-                  name: https://docker.pkg.github.com/everlynd/art-pet/art-pet
+                  name: https:/docker.pkg.github.com/everlynd/art-pet/art-pet
                   username: ${{ github.actor }}
                   password: ${{ secrets.GITHUB_TOKEN }}
                   tags: 'develop'
