@@ -1,5 +1,6 @@
 * {
   font-family: 'Roboto';
+  box-sizing: border-box;
 }
 
 body {
@@ -7,11 +8,26 @@ body {
   margin: 0;
 }
 
+body:has(.minified) .sidebar {
+  width: 65px;
+}
+
+body:has(.minified) .sidebar span {
+  opacity: 0;
+  visibility: hidden;
+}
+
+body:has(.minified) .cp-container {
+  margin-left: 100px;
+}
+
+
 .cp-container {
   margin-top: 100px;
   margin-left: 285px;
   padding-right: 40px;
   padding-bottom: 40px;
+  transition: margin-left 0.3s;
 }
 
 form input[type="submit"] {

@@ -6,7 +6,17 @@ import { Icon } from '../Icons/Icons';
 
 export default function Sidebar() {
     return (
-        <Box sx={{ width: 250, height: '100vh', background: '#081229', position: 'fixed', top: '60px' }}>
+        <Box
+            sx={{
+                width: 250,
+                height: '100vh',
+                background: '#081229',
+                position: 'fixed',
+                top: '60px',
+                transition: 'width 0.3s',
+            }}
+            className={'sidebar'}
+        >
             <List
                 sx={{
                     display: 'flex',
@@ -37,7 +47,7 @@ export default function Sidebar() {
                         >
                             {<Icon name={`${elem}`} />}
                         </ListItemIcon>
-                        {elem}
+                        <span>{elem}</span>
                     </Link>
                 ))}
             </List>

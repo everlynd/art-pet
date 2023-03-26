@@ -4,8 +4,9 @@ import { useState } from 'react';
 
 export const Header = ({ currentPage }: { currentPage: string }) => {
     const [isOpen, setOpen] = useState(false);
+    console.log(isOpen);
     return (
-        <AppBar>
+        <AppBar className={isOpen ? 'minified' : ''}>
             <Toolbar sx={{ bgcolor: '#081229' }}>
                 <IconButton
                     size="large"
@@ -13,7 +14,7 @@ export const Header = ({ currentPage }: { currentPage: string }) => {
                     color="inherit"
                     aria-label="menu"
                     sx={{ mr: 2 }}
-                    onClick={() => setOpen(true)}
+                    onClick={() => setOpen((prev) => !prev)}
                 >
                     <MenuIcon />
                 </IconButton>
